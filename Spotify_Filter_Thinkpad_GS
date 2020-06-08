@@ -1,3 +1,7 @@
+#LAST FM - SPOTIFY
+#THINKPAD - GOOGLE SHEETS
+#WINDOWS 10 - CURSOR POSITION Mofiki's Coordinate Finder.exe
+
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
