@@ -1,0 +1,104 @@
+import pandas as pd
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+from pandas.io.json import json_normalize
+
+## Connect to our service account
+scope = ['https://spreadsheets.google.com/feeds']
+credentials = ServiceAccountCredentials.from_json_keyfile_name('./groovy-form-278909-7544af31376f.json', scope)
+gc = gspread.authorize(credentials)
+
+
+import pyautogui
+import tkinter
+
+from time import sleep
+
+pyautogui.click(10, 10)
+pyautogui.click(313, 218)
+pyautogui.drag(1065, 561, duration=1)
+
+pyautogui.hotkey('ctrl', 'c')
+
+root = tkinter.Tk()
+root.withdraw()
+a = root.clipboard_get()
+
+#pyautogui.click(429, 142)
+
+b = a.split('\n')
+
+e = b[3]
+
+f = e[-18:-14]
+
+year = int(f)
+
+c = e.split(f)
+
+d = c[0]
+
+g = len(d)
+
+h = (g / 2)
+
+i = int(h)
+
+artist = d[i:]
+
+print("Artist:")
+print(artist)
+print("Year:")
+print(year)
+print("")
+
+
+##Get candidate data sheet from Google Drive
+spreadsheet_key = '1NsVZ4Ni5oN24bBA1FIxMvrP64gjb9ZD9iXfAAXGGAtw'
+book = gc.open_by_key(spreadsheet_key)
+worksheet = book.worksheet("listofforbidden")
+listofforbidden = worksheet.get_all_values()
+
+worksheet = book.worksheet("listoffavorites")
+listoffavorites = worksheet.get_all_values()
+
+worksheet = book.worksheet("year_limit")
+
+lower_year = worksheet.cell(2, 1).value
+int_lower_year = int(lower_year)
+print("Lower year limit:")
+print(int_lower_year)
+print("")
+
+upper_year = worksheet.cell(5, 1).value
+int_upper_year = int(upper_year)
+print("Upper year limit:")
+print(int_upper_year)
+print("")
+
+manual_skip = worksheet.cell(8, 1).value
+print("Manual Skip:")
+print(manual_skip)
+print("")
+
+listofmanualskip = [['yes'], ['Yes'], ['y'], ['Y']]
+
+if any(manual_skip in m for m in listofmanualskip):
+    print("To be skipped because of Manual Skip")
+    print("")
+    pyautogui.click(113, 411)
+    
+if any(artist in t for t in listofforbidden):
+    print("To be skipped because in listofforbidden")
+    print("")
+    pyautogui.click(1019, 953)
+
+
+if any(artist in s for s in listoffavorites):
+    print("Not to be skipped because in listoffavorites")
+    print("")
+else:
+    if year < int_lower_year or year > int_upper_year:
+        print("To be skipped because not in listoffavorites and too old or too recent")
+        print("")
+        pyautogui.click(113, 411)
