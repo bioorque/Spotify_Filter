@@ -28,17 +28,17 @@ root = tkinter.Tk()
 root.withdraw()
 a = root.clipboard_get()
 
-#pyautogui.click(429, 142)
-
 b = a.split('\n')
 
 e = b[3]
 
-f = e[-18:-14]
+year_cut_list = ['180','181','182','183','184','185','186','187','188','189','190','191','192','193','194','195','196','197','199','200','201','202']
 
-year = int(f)
+for x in year_cut_list:
 
-c = e.split(f)
+    if x in e:
+    
+        c = e.split(x)
 
 d = c[0]
 
@@ -50,12 +50,19 @@ i = int(h)
 
 artist = d[i:]
 
+j = e.split(artist)
+
+k = j[2]
+
+l = k[:4]
+
+year = int(l)
+
 print("Artist:")
 print(artist)
 print("Year:")
 print(year)
 print("")
-
 
 ##Get candidate data sheet from Google Drive
 spreadsheet_key = '1NsVZ4Ni5oN24bBA1FIxMvrP64gjb9ZD9iXfAAXGGAtw'
