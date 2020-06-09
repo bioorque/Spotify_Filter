@@ -21,6 +21,13 @@ from time import sleep
 while True:
 
     pyautogui.click(10, 10)
+    
+    sleep(2)
+    
+    pyautogui.click(111, 969)
+    
+    sleep(2)
+    
     pyautogui.click(313, 218)
     pyautogui.drag(1065, 561, duration=1)
     
@@ -99,7 +106,7 @@ while True:
     if any(manual_skip in m for m in listofmanualskip):
         print("To be skipped because of Manual Skip")
         print("")
-        pyautogui.click(113, 411)
+        pyautogui.click(1019, 953)
         
     if any(artist in t for t in listofforbidden):
         print("To be skipped because in listofforbidden")
@@ -114,6 +121,6 @@ while True:
         if year < int_lower_year or year > int_upper_year:
             print("To be skipped because not in listoffavorites and too old or too recent")
             print("")
-        pyautogui.click(113, 411)
+        pyautogui.click(1019, 953)
         
     sleep(10)
